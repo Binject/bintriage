@@ -12,12 +12,19 @@ func PeBinTriage(sourceFile string) error {
 	if err != nil {
 		return err
 	}
+
+	// Header deets
+	log.Println(cyan.Printf("DosHeader: %+v", peFile.DosHeader))
+	log.Println(blue.Printf("Rich Hdeader: %+v", peFile.RichHeader))
+	log.Println(cyan.Printf("Pe Header: %+v", peFile.FileHeader))
+	log.Println(blue.Printf("Optional Header: %+v", peFile.OptionalHeader))
+
 	for _, section := range peFile.Sections {
-		log.Printf("Section details: %+v", section)
+		log.Println(cyan.Printf("Section details: %+v", section))
 	}
 
 	for _, symbol := range peFile.Symbols {
-		log.Printf("Symbol details: %+v", symbol)
+		log.Println(blue.Printf("Symbol details: %+v", symbol))
 	}
 
 	libraries, err := peFile.ImportedLibraries()
@@ -25,7 +32,7 @@ func PeBinTriage(sourceFile string) error {
 		log.Fatal(err)
 	}
 	for _, ilib := range libraries {
-		log.Printf("Imported lib details: %+v", ilib)
+		log.Println(cyan.Printf("Imported lib details: %+v", ilib))
 	}
 
 	impSymbs, err := peFile.ImportedSymbols()
@@ -33,8 +40,19 @@ func PeBinTriage(sourceFile string) error {
 		log.Fatal(err)
 	}
 	for _, isymb := range impSymbs {
-		log.Printf("Imported symbol details: %+v", isymb)
+		log.Println(blue.Printf("Imported symbol details: %+v", isymb))
 	}
+
+	// COFFSymbols
+	log.Println(cyan.Printf("Coff symbols: %+v", peFile.COFFSymbols))
+
+	// String Table
+	//log.Println(blue.Printf("String Table: %+v", peFile.StringTable))
+
+	// the certificate table
+	//if peFile.CertificateTable != nil {
+	//	log.Println(cyan.Printf("Cert Table: %+v", peFile.CertificateTable))
+	//}
 
 	return nil
 }

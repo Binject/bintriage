@@ -14,11 +14,11 @@ func MachoBinTriage(sourceFile string) error {
 	}
 
 	// Macho Header
-	log.Printf("your macho header: %+v", machoFile.FileHeader)
+	log.Println(cyan.Printf("your macho header: %+v", machoFile.FileHeader))
 
 	// Load Commands
 	for _, singleLoad := range machoFile.Loads {
-		log.Println(cyan.Sprintf("Single Load Command: %+v", singleLoad))
+		log.Println(blue.Sprintf("Single Load Command: %+v", singleLoad))
 	}
 
 	// Sections
@@ -28,7 +28,7 @@ func MachoBinTriage(sourceFile string) error {
 
 	// Symbols
 	for _, symbol := range machoFile.Symtab.Syms {
-		log.Println(blue.Sprintf("Symbol details: %+v", symbol))
+		log.Println(cyan.Sprintf("Symbol details: %+v", symbol))
 	}
 
 	// SymTab
@@ -55,9 +55,9 @@ func MachoBinTriage(sourceFile string) error {
 	}
 
 	// StringTab
-	if machoFile.Symtab.RawStringtab != nil {
-		log.Println(blue.Sprintf("StringTab deets: %+v", machoFile.Symtab.RawStringtab))
-	}
+	//if machoFile.Symtab.RawStringtab != nil {
+	//	log.Println(blue.Sprintf("StringTab deets: %+v", machoFile.Symtab.RawStringtab))
+	//}
 
 	if machoFile.SigBlock != nil {
 		log.Println(cyan.Printf("Sigblock: %+v", machoFile.SigBlock))
