@@ -15,3 +15,7 @@ Usage of ./bintriage:
   -logFile string
     	send stdout to a log file
 ```
+
+
+## Read more about the project here:
+https://www.symbolcrash.com/2019/02/23/introducing-symbol-crash/
